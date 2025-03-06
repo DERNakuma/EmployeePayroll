@@ -1,6 +1,7 @@
 package com.example.EmployeePayrollApp.services;
 
 import com.example.EmployeePayrollApp.model.Employee;
+import com.example.EmployeePayrollApp.dto.EmployeeDTO;
 import com.example.EmployeePayrollApp.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,14 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Employee addEmployee(Employee employee){
-        return employeeRepository.save(employee);
+
+    EmployeeDTO empDTO;
+    public Employee addEmployee(EmployeeDTO empDTO){
+        Employee emp=new Employee();
+            emp.setName(empDTO.getName());
+            emp.setSalary(empDTO.getSalary());
+            emp.setDepartment(empDTO.getDepartment());
+        return employeeRepository.save(emp);
 
     }
     public Employee getEmployeeById(Long id){
@@ -26,11 +33,11 @@ public class EmployeeService {
 
     }
 
-    public Employee updateEmployee(Long id, Employee employee){
+    public Employee updateEmployee(Long id, EmployeeDTO empDTO){
         Employee found=getEmployeeById(id);
-        found.setName(employee.getName());
-        found.setDepartment(employee.getDepartment());
-        found.setSalary(employee.getSalary());
+        found.setName(empDTO.getName());
+        found.setDepartment(empDTO.getDepartment());
+        found.setSalary(empDTO.getSalary());
         return employeeRepository.save(found);
 
     }
