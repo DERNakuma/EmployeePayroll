@@ -18,6 +18,7 @@ public class EmployeeService implements EmployeeInterface {
 
     EmployeeDTO empDTO;
     public Employee addEmployee(EmployeeDTO empDTO){
+
         Employee emp=new Employee();
             emp.setName(empDTO.getName());
             emp.setSalary(empDTO.getSalary());
